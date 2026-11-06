@@ -1,0 +1,33 @@
+مشروع Omnia Workspace — نسخة مستقلة تمامًا عن Sekai
+=====================================================
+
+المحتوى:
+  public/            الواجهة الأمامية (index.html + app-bridge.js + الشعار)
+  server/            الخادم (Express + PostgreSQL + Supabase Storage)
+  server/schema.sql  جداول قاعدة البيانات
+  supabase-storage.sql  إنشاء Buckets الخاصة بالملفات
+  render.yaml        إعداد النشر على Render (خدمة ويب + نسخ احتياطي يومي)
+  .env.example       قالب المتغيرات البيئية
+  README.md          الشرح الكامل بالعربية (١١ قسمًا)
+
+التشغيل المحلي:
+  1) npm install
+  2) cp .env.example .env   ثم عدّل القيم
+  3) npm run migrate
+  4) npm start
+  5) افتح http://localhost:3000
+
+النشر على الإنترنت (٢٤/٧):
+  1) Supabase: أنشئ مشروعًا، ثم SQL Editor والصق:
+       - server/schema.sql
+       - supabase-storage.sql
+     وانسخ: DATABASE_URL و SUPABASE_URL و SUPABASE_SERVICE_ROLE_KEY
+  2) Render: ارفع المشروع إلى GitHub ثم New > Blueprint واختر render.yaml
+     وأدخل المتغيرات الثلاثة أعلاه + BACKUP_SECRET
+  3) Cloudflare: أضف CNAME يشير إلى رابط Render، ثم أضف الدومين في Render
+
+ملاحظات مهمة:
+  - لا يوجد أي اعتماد على Sekai في هذا المشروع.
+  - لا تضع أي مفتاح سري داخل public/ — كل المفاتيح في متغيرات البيئة على الخادم فقط.
+  - خطة Render المجانية تُوقف الخدمة بعد ١٥ دقيقة خمول؛ للتوفر الدائم استخدم Starter (~7$ شهريًا).
+  - Supabase المجاني يوقف المشروع بعد أسبوع خمول؛ Pro (~25$ شهريًا) يمنع ذلك.

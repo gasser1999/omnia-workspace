@@ -1,0 +1,66 @@
+# Render Blueprint — Omnia Workspace
+# Deploy: push this repo to GitHub → Render → New → Blueprint → select repo.
+services:
+  - type: web
+    name: omnia-workspace
+    runtime: node
+    plan: starter          # starter = always-on (24/7). Use "free" only for testing (sleeps after 15 min).
+    region: frankfurt
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: TRUST_PROXY
+        value: "true"
+      - key: STORAGE_DRIVER
+        value: supabase
+      - key: SUPABASE_BUCKET
+        value: workspace-files
+      - key: SUPABASE_BACKUP_BUCKET
+        value: workspace-backups
+      - key: MAX_UPLOAD_BYTES
+        value: "26214400"
+      - key: MAX_WORKSPACE_BYTES
+        value: "5242880"
+      - key: DATABASE_URL
+        sync: false        # paste from Supabase → Database → Connection string
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: BACKUP_SECRET
+        generateValue: true
+
+  # Optional daily backup job. Remove this block if you prefer an external cron.
+  - type: cron
+    name: omnia-daily-backup
+    runtime: node
+    plan: starter
+    region: frankfurt
+    schedule: "0 2 * * *"   # every day at 02:00 UTC
+    buildCommand: npm ci --omit=dev
+    startCommand: node server/backup-cli.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: STORAGE_DRIVER
+        value: supabase
+      - key: SUPABASE_BUCKET
+        value: workspace-files
+      - key: SUPABASE_BACKUP_BUCKET
+        value: workspace-backups
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false

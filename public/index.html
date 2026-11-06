@@ -1,0 +1,1906 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Omnia Workspace</title>
+
+    <!-- Error ingestors, FIRST script on purpose: errors stay visible -->
+    <script data-sekai-platform="errors">window.__sekaiErrors=[];window.onerror=function(m,s,l,c,e){window.__sekaiErrors.push({m:String(m),s:s,l:l});};window.addEventListener('unhandledrejection',function(e){window.__sekaiErrors.push({m:String(e.reason)});});</script> <!-- sekai:keep=__sekaiErrors -->
+
+    <!-- The page's ONLY import map -->
+    <script data-sekai-editable>
+window.sekaiEditable = {
+  "images": [
+    {
+      "id": "user-image-1-523bf96d-df7d-48b3-bde1-010",
+      "label": "User Image 1 523Bf96D Df7D 48B3 Bde1 010",
+      "type": "image",
+      "description": "user image 1 523bf96d df7d 48b3 bde1 010",
+      "value": "./assets/logo.webp",
+      "source": "user"
+    }
+  ],
+  "music": [],
+  "sfx": [],
+  "fonts": [],
+  "models": [],
+  "videos": [],
+  "tune": [],
+  "text": [],
+  "colors": [
+    {
+      "id": "bg",
+      "label": "Bg",
+      "type": "color",
+      "cssVar": "--sekai-bg",
+      "value": "#FAF6F0"
+    },
+    {
+      "id": "ink",
+      "label": "Ink",
+      "type": "color",
+      "cssVar": "--sekai-ink",
+      "value": "#3E3A34"
+    },
+    {
+      "id": "card-border",
+      "label": "Card Border",
+      "type": "color",
+      "cssVar": "--sekai-card-border",
+      "value": "#E8E1D5"
+    },
+    {
+      "id": "card-bg",
+      "label": "Card Bg",
+      "type": "color",
+      "cssVar": "--sekai-card-bg",
+      "value": "#FFFFFF"
+    },
+    {
+      "id": "accent-green",
+      "label": "Accent Green",
+      "type": "color",
+      "cssVar": "--sekai-accent-green",
+      "value": "#8FAE8B"
+    },
+    {
+      "id": "accent-green-soft",
+      "label": "Accent Green Soft",
+      "type": "color",
+      "cssVar": "--sekai-accent-green-soft",
+      "value": "#EEF4EE"
+    },
+    {
+      "id": "muted",
+      "label": "Muted",
+      "type": "color",
+      "cssVar": "--sekai-muted",
+      "value": "#8A847B"
+    },
+    {
+      "id": "accent-pink-soft",
+      "label": "Accent Pink Soft",
+      "type": "color",
+      "cssVar": "--sekai-accent-pink-soft",
+      "value": "#FBF0F1"
+    },
+    {
+      "id": "accent-beige",
+      "label": "Accent Beige",
+      "type": "color",
+      "cssVar": "--sekai-accent-beige",
+      "value": "#D9C7A7"
+    },
+    {
+      "id": "accent-pink",
+      "label": "Accent Pink",
+      "type": "color",
+      "cssVar": "--sekai-accent-pink",
+      "value": "#E8B4B8"
+    }
+  ],
+  "prompts": [],
+  "voices": []
+};
+</script> <!-- sekai:keep -->
+    <script type="importmap">{"imports":{}}</script> <!-- sekai:keep=importmap -->
+
+    <!-- window.sekaiEditable is auto-generated into sekai-editable.js -->
+
+    <!-- Standalone runtime: all Sekai bridge scripts removed. -->
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      :root {
+        --sekai-bg: #FAF6F0;
+        --sekai-ink: #3E3A34;
+        --sekai-card-bg: #FFFFFF;
+        --sekai-card-border: #E8E1D5;
+        --sekai-accent-green: #8FAE8B;
+        --sekai-accent-pink: #E8B4B8;
+        --sekai-accent-beige: #D9C7A7;
+        --sekai-accent-green-soft: #EEF4EE;
+        --sekai-accent-pink-soft: #FBF0F1;
+        --sekai-muted: #8A847B;
+        --app-shadow: 0 4px 18px rgba(62, 58, 52, 0.05);
+      }
+      [data-theme="dark"] {
+        --app-bg: #1F1D1A;
+        --app-ink: #F2EFE9;
+        --app-card-bg: #2A2723;
+        --app-card-border: #3D3934;
+        --app-accent-green: #7E9E7A;
+        --app-accent-pink: #D49FA3;
+        --app-accent-beige: #B8A88F;
+        --app-accent-green-soft: #2B332B;
+        --app-accent-pink-soft: #382A2C;
+        --app-muted: #9E988E;
+        --app-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+      }
+      html, body {
+        margin: 0; padding: 0; height: 100%; width: 100%;
+        background: var(--sekai-bg, #FAF6F0); color: var(--sekai-ink, #3E3A34);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Cairo", "Amiri", Tahoma, sans-serif;
+        overflow: hidden; touch-action: manipulation;
+        user-select: none; -webkit-user-select: none;
+      }
+      #game {
+        width: 100%; height: 100%; position: relative;
+        display: flex; flex-direction: column; overflow: hidden;
+      }
+
+      /* Screens & Layout */
+      .screen {
+        display: none; width: 100%; height: 100%;
+        flex-direction: column; overflow: hidden; position: relative;
+      }
+      .screen.active { display: flex; }
+
+      /* Buttons & inputs touch feel */
+      button, [role="button"] {
+        touch-action: manipulation; cursor: pointer; border: none; outline: none;
+        font-family: inherit; transition: transform 0.15s ease, opacity 0.15s ease, background 0.2s ease;
+      }
+      button:active, [role="button"]:active { transform: scale(0.96); opacity: 0.88; }
+      input, textarea, select {
+        font-family: inherit; font-size: 16px; outline: none; border-radius: 10px;
+        border: 1px solid var(--sekai-card-border); background: var(--sekai-card-bg);
+        color: var(--sekai-ink); padding: 10px 14px; width: 100%;
+      }
+      input:focus, textarea:focus, select:focus {
+        border-color: var(--sekai-accent-green); box-shadow: 0 0 0 2px var(--sekai-accent-green-soft);
+      }
+
+      /* Top Header */
+      .app-header {
+        flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
+        padding: 10px 16px; border-bottom: 1px solid var(--sekai-card-border, #E8E1D5);
+        background: var(--sekai-card-bg, #FFFFFF); z-index: 40;
+      }
+      .header-brand { display: flex; align-items: center; gap: 10px; }
+      .header-brand img { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
+      .header-brand-title { font-weight: 700; font-size: 16px; line-height: 1.1; }
+      .header-brand-sub { font-size: 11px; color: var(--sekai-muted); }
+      .header-actions { display: flex; align-items: center; gap: 8px; }
+      .icon-btn {
+        width: 36px; height: 36px; border-radius: 18px; display: inline-flex;
+        align-items: center; justify-content: center; background: var(--sekai-accent-green-soft);
+        color: var(--sekai-ink); font-size: 13px; font-weight: 600;
+      }
+
+      /* Content Area */
+      .app-content {
+        flex: 1 1 0; min-height: 0; overflow-y: auto; overflow-x: hidden;
+        padding: 14px 16px; display: flex; flex-direction: column; gap: 14px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Bottom Navigation Tab Bar */
+      .tab-bar {
+        flex-shrink: 0; display: flex; background: var(--sekai-card-bg);
+        border-top: 1px solid var(--sekai-card-border); z-index: 40;
+        padding: 4px 6px; padding-bottom: max(6px, env(safe-area-inset-bottom));
+      }
+      .tab-btn {
+        flex: 1 1 0; min-width: 0; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; padding: 6px 2px;
+        background: transparent; color: var(--sekai-muted); border-radius: 10px;
+        gap: 3px; font-size: 11px; font-weight: 600;
+      }
+      .tab-btn.active {
+        color: var(--sekai-accent-green); background: var(--sekai-accent-green-soft);
+      }
+      .tab-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+      .tab-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+      /* Cards */
+      .card {
+        background: var(--sekai-card-bg, #FFFFFF); border: 1px solid var(--sekai-card-border, #E8E1D5);
+        border-radius: 16px; padding: 14px 16px; box-shadow: var(--app-shadow);
+      }
+      .card-header {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .card-title {
+        font-size: 15px; font-weight: 700; color: var(--sekai-ink);
+        display: flex; align-items: center; gap: 6px;
+      }
+      .card-sub { font-size: 12px; color: var(--sekai-muted); }
+
+      /* Primary CTA */
+      .btn-primary {
+        background: var(--sekai-accent-green); color: #FFFFFF; font-weight: 700;
+        padding: 12px 18px; border-radius: 12px; display: inline-flex; align-items: center;
+        justify-content: center; gap: 8px; width: 100%; font-size: 15px;
+      }
+      .btn-secondary {
+        background: var(--sekai-accent-pink-soft); color: var(--sekai-ink); font-weight: 600;
+        padding: 9px 14px; border-radius: 10px; display: inline-flex; align-items: center;
+        justify-content: center; gap: 6px; font-size: 13px;
+      }
+      .btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 8px; }
+
+      /* Toast Notification */
+      #save-toast {
+        position: fixed; bottom: 74px; left: 50%; transform: translateX(-50%) translateY(20px);
+        background: var(--sekai-ink); color: var(--sekai-bg); padding: 8px 18px;
+        border-radius: 20px; font-size: 13px; font-weight: 600; z-index: 60;
+        opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.18); display: flex; align-items: center; gap: 6px;
+      }
+      #save-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      /* Empty states */
+      .empty-state {
+        text-align: center; padding: 24px 12px; color: var(--sekai-muted);
+        display: flex; flex-direction: column; align-items: center; gap: 10px;
+      }
+      .empty-sprig { width: 42px; height: 42px; stroke: var(--sekai-accent-green); opacity: 0.7; }
+      .empty-text { font-size: 14px; font-weight: 500; }
+
+      /* Welcome Banner */
+      .welcome-banner {
+        background: linear-gradient(135deg, var(--sekai-accent-pink-soft), var(--sekai-accent-green-soft));
+        border: 1px solid var(--sekai-card-border); border-radius: 16px; padding: 16px;
+        position: relative; overflow: hidden;
+      }
+      .welcome-quote {
+        font-size: 14px; line-height: 1.7; font-weight: 600; color: var(--sekai-ink);
+        white-space: pre-line;
+      }
+
+      /* Login Screen */
+      #login-screen {
+        background: var(--sekai-bg); align-items: center; justify-content: center;
+        padding: 20px;
+      }
+      .login-box {
+        width: 100%; max-width: 380px; background: var(--sekai-card-bg);
+        border: 1px solid var(--sekai-card-border); border-radius: 22px;
+        padding: 28px 24px; box-shadow: var(--app-shadow); text-align: center;
+        display: flex; flex-direction: column; gap: 16px;
+      }
+      .login-logo {
+        width: 110px; height: 110px; margin: 0 auto; object-fit: contain;
+        border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      }
+      .login-title { font-size: 22px; font-weight: 800; margin: 0; color: var(--sekai-ink); }
+      .login-subtitle { font-size: 13px; color: var(--sekai-muted); margin: 0; }
+      .login-form { display: flex; flex-direction: column; gap: 12px; text-align: right; }
+      [dir="ltr"] .login-form { text-align: left; }
+      .form-label { font-size: 12px; font-weight: 600; color: var(--sekai-muted); margin-bottom: 4px; display: block; }
+      .login-error {
+        color: #D9534F; font-size: 12px; font-weight: 600; min-height: 16px; text-align: center;
+      }
+
+      /* Day Schedule Chips */
+      .days-strip {
+        display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .day-chip {
+        flex: 1 1 0; min-width: 44px; text-align: center; padding: 8px 4px;
+        background: var(--sekai-card-bg); border: 1px solid var(--sekai-card-border);
+        border-radius: 10px; font-size: 12px; font-weight: 600; color: var(--sekai-muted);
+      }
+      .day-chip.active {
+        background: var(--sekai-accent-green); color: #FFF; border-color: var(--sekai-accent-green);
+      }
+      .day-chip.has-sessions::after {
+        content: '•'; display: block; font-size: 14px; line-height: 4px; margin-top: 3px;
+      }
+
+      /* Session Item */
+      .session-card {
+        border-right: 4px solid var(--sekai-accent-green);
+        background: var(--sekai-card-bg); border-radius: 12px; padding: 12px;
+        margin-bottom: 8px; border-top: 1px solid var(--sekai-card-border);
+        border-bottom: 1px solid var(--sekai-card-border); border-left: 1px solid var(--sekai-card-border);
+        display: flex; flex-direction: column; gap: 4px; position: relative;
+      }
+      [dir="ltr"] .session-card { border-right: 1px solid var(--sekai-card-border); border-left: 4px solid var(--sekai-accent-green); }
+      .session-card.conflict {
+        border-color: #E8A4A8; background: var(--sekai-accent-pink-soft);
+      }
+      .session-top { display: flex; justify-content: space-between; align-items: center; }
+      .session-name { font-weight: 700; font-size: 14px; }
+      .session-time { font-size: 12px; font-weight: 600; color: var(--sekai-accent-green); }
+      .session-loc { font-size: 12px; color: var(--sekai-muted); }
+      .session-note { font-size: 12px; font-style: italic; color: var(--sekai-ink); background: rgba(0,0,0,0.03); padding: 4px 8px; border-radius: 6px; }
+
+      /* Files List */
+      .file-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 10px 12px; background: var(--sekai-card-bg);
+        border: 1px solid var(--sekai-card-border); border-radius: 12px; margin-bottom: 8px;
+        gap: 10px;
+      }
+      .file-meta { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+      .file-icon-badge {
+        width: 36px; height: 36px; border-radius: 8px; background: var(--sekai-accent-green-soft);
+        color: var(--sekai-accent-green); display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 11px; flex-shrink: 0;
+      }
+      .file-info { min-width: 0; flex: 1; }
+      .file-name-text { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .file-size-date { font-size: 11px; color: var(--sekai-muted); }
+      .file-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+      /* Notes */
+      .note-card {
+        background: var(--sekai-card-bg); border: 1px solid var(--sekai-card-border);
+        border-radius: 14px; padding: 12px 14px; margin-bottom: 10px;
+        display: flex; flex-direction: column; gap: 6px; box-shadow: var(--app-shadow);
+      }
+      .note-card.pinned {
+        border-color: var(--sekai-accent-beige); background: #FFFCF7;
+      }
+      [data-theme="dark"] .note-card.pinned { background: #2E2A24; }
+      .note-top { display: flex; justify-content: space-between; align-items: center; }
+      .note-tag {
+        font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px;
+        background: var(--sekai-accent-pink-soft); color: var(--sekai-ink);
+      }
+      .note-text { font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+      .note-date { font-size: 10px; color: var(--sekai-muted); }
+
+      /* Wird Rings & Tracker */
+      .wird-ring-wrap {
+        display: flex; align-items: center; justify-content: space-around;
+        padding: 12px 0;
+      }
+      .ring-box { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .ring-circle {
+        position: relative; width: 84px; height: 84px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .ring-label { font-size: 12px; font-weight: 700; color: var(--sekai-ink); }
+      .ring-percent { font-size: 16px; font-weight: 800; color: var(--sekai-accent-green); }
+      .wird-congrats {
+        background: var(--sekai-accent-green-soft); border: 1px solid var(--sekai-accent-green);
+        border-radius: 12px; padding: 12px; text-align: center; color: var(--sekai-ink);
+        font-weight: 700; font-size: 13px; line-height: 1.6; margin-top: 10px;
+        animation: softPop 0.4s ease;
+      }
+      @keyframes softPop {
+        from { transform: scale(0.95); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+
+      /* Assistant Drawer/Panel */
+      .assistant-box {
+        background: var(--sekai-accent-green-soft); border: 1px solid var(--sekai-accent-green);
+        border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+        font-size: 13px; line-height: 1.5;
+      }
+      .assistant-title { font-weight: 700; color: var(--sekai-ink); display: flex; align-items: center; gap: 6px; }
+
+      /* Modal sheet */
+      .modal-backdrop {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+        display: none; align-items: flex-end; justify-content: center; z-index: 55;
+        backdrop-filter: blur(2px);
+      }
+      .modal-backdrop.open { display: flex; }
+      .modal-sheet {
+        background: var(--sekai-card-bg); width: 100%; max-width: 480px;
+        border-top-left-radius: 20px; border-top-right-radius: 20px;
+        padding: 20px 18px; max-height: 85vh; overflow-y: auto;
+        display: flex; flex-direction: column; gap: 14px;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.15); animation: sheetUp 0.25s ease-out;
+      }
+      @keyframes sheetUp {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game">
+
+      <!-- ================= LOGIN SCREEN ================= -->
+      <section id="screen-login" class="screen active" data-spec-id="screen-login">
+        <div class="login-box">
+          <!-- Logo image declared via getConfig slot -->
+          <img
+            id="login-logo-img"
+            data-spec-id="login-logo-img"
+            class="login-logo"
+            src=""
+            alt="Omnia Workspace"
+          />
+          <div>
+            <h1 class="login-title" data-spec-id="login-title">Omnia Workspace</h1>
+            <p class="login-subtitle" id="login-sub-text">مساحة ميس أمنية الخاصة للعمل والتنظيم</p>
+          </div>
+          <div class="login-form">
+            <div>
+              <label class="form-label" id="label-name">الاسم / Name</label>
+              <input type="text" id="login-name-input" data-spec-id="login-name-input" placeholder="اكتبي اسمكِ / Enter your name" autocomplete="off" name="workspace-login-name" />
+            </div>
+            <div>
+              <label class="form-label" id="label-email">البريد الإلكتروني / Email</label>
+              <input type="email" id="login-email-input" data-spec-id="login-email-input" placeholder="name@example.com" autocomplete="email" name="workspace-login-email" dir="ltr" />
+            </div>
+            <div>
+              <label class="form-label" id="label-pass">كلمة المرور / Password</label>
+              <input type="password" id="login-pass-input" data-spec-id="login-pass-input" placeholder="اكتبي كلمة المرور / Enter password" autocomplete="current-password" name="workspace-login-password" />
+            </div>
+            <div id="login-error-msg" data-spec-id="login-error-msg" class="login-error"></div>
+            <button id="login-submit-btn" data-spec-id="login-submit-btn" class="btn-primary" type="button">
+              تسجيل الدخول
+            </button>
+            <button id="auth-mode-toggle" type="button" style="background:none;border:none;color:var(--sekai-muted);font-size:12px;font-weight:600;text-decoration:underline;padding:2px;">ليس لديكِ حساب؟ إنشاء حساب جديد</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= MAIN APP WORKSPACE ================= -->
+      <section id="screen-workspace" class="screen" data-spec-id="screen-workspace">
+        <!-- Top Header -->
+        <header class="app-header">
+          <div class="header-brand">
+            <img id="header-logo-img" data-spec-id="header-logo-img" src="" alt="Omnia" />
+            <div>
+              <div class="header-brand-title" id="header-title-text">Omnia Workspace</div>
+              <div class="header-brand-sub" id="header-user-greet">ميس أمنية</div>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button id="btn-theme-toggle" data-spec-id="btn-theme-toggle" class="icon-btn" title="تبديل المظهر" aria-label="Theme">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            </button>
+            <button id="btn-lang-toggle" data-spec-id="btn-lang-toggle" class="icon-btn" title="Language" aria-label="Lang">
+              EN
+            </button>
+            <button id="btn-logout" data-spec-id="btn-logout" class="icon-btn" title="خروج" aria-label="Logout">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Sub-pages Content -->
+        <div id="content-home" class="app-content" data-spec-id="content-home">
+          <!-- 1. Welcome Banner -->
+          <div class="welcome-banner card">
+            <div id="welcome-banner-text" data-spec-id="welcome-banner-text" class="welcome-quote">
+أهلًا بكِ يا أمنية 🌷
+هذه مساحتكِ الخاصة، رتّبي يومكِ، واحفظي أفكاركِ، وحققي إنجازاتكِ.
+كل يوم جديد فرصة لإنجاز شيء جميل.
+            </div>
+            <div id="dashboard-date-str" style="font-size:12px; color:var(--sekai-muted); margin-top:8px; font-weight:600;"></div>
+          </div>
+
+          <!-- 2. Nearest Upcoming Group -->
+          <div class="card" id="card-upcoming-group">
+            <div class="card-header">
+              <span class="card-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                أقرب مجموعة قادمة
+              </span>
+              <span class="card-sub" id="upcoming-status-tag">اليوم</span>
+            </div>
+            <div id="upcoming-group-details" class="session-card" style="margin-bottom:0;">
+              <div class="session-top">
+                <span class="session-name" id="upcoming-name">لا توجد مواعيد قادمة اليوم</span>
+                <span class="session-time" id="upcoming-time">--:--</span>
+              </div>
+              <div class="session-loc" id="upcoming-loc">اضغطي على تبويب «جدولي» لإضافة حصص ومجموعات</div>
+            </div>
+          </div>
+
+          <!-- 3. Today's Schedule Overview -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">جدول اليوم</span>
+              <button id="btn-quick-add-session" class="btn-secondary btn-sm" type="button">+ حصة جديدة</button>
+            </div>
+            <div id="dashboard-today-list"></div>
+          </div>
+
+          <!-- 4. Wird Status Card -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">حالة الورد اليومي</span>
+              <button id="btn-dashboard-wird-done" class="btn-secondary btn-sm" type="button">تم الإنجاز</button>
+            </div>
+            <div id="dashboard-wird-summary" style="font-size:13px; font-weight:600; color:var(--sekai-ink); line-height:1.6;"></div>
+          </div>
+
+          <!-- 5. Latest Notes -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">آخر الملاحظات</span>
+              <button id="btn-quick-add-note" class="btn-secondary btn-sm" type="button">+ ملاحظة</button>
+            </div>
+            <div id="dashboard-notes-list"></div>
+          </div>
+
+          <!-- 6. Recent Files -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">الملفات المضافة مؤخرًا</span>
+              <button id="btn-quick-upload-file" class="btn-secondary btn-sm" type="button">+ رفع ملف</button>
+            </div>
+            <div id="dashboard-files-list"></div>
+          </div>
+
+          <!-- 7. Pending Tasks -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">المهام التي تحتاج إلى إنجاز</span>
+            </div>
+            <div id="dashboard-tasks-list"></div>
+          </div>
+        </div>
+
+        <!-- ================= SECTION: FILES ================= -->
+        <div id="content-files" class="app-content" style="display:none;" data-spec-id="content-files">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">ملفاتي التعليمية والإدارية</span>
+              <span class="card-sub" id="files-count-badge">0 ملف</span>
+            </div>
+            <div style="display:flex; gap:8px; margin-bottom:12px;">
+              <input type="text" id="files-search-input" placeholder="البحث عن أي ملف باسمه..." style="flex:1;" />
+              <button id="btn-upload-file" data-spec-id="btn-upload-file" class="btn-primary" style="width:auto; padding:10px 14px;" type="button">
+                رفع ملف
+              </button>
+              <input type="file" id="real-file-input" accept=".pdf,.ppt,.pptx" style="display:none;" />
+            </div>
+            <div style="display:flex; gap:6px; margin-bottom:12px; overflow-x:auto;">
+              <button class="btn-secondary btn-sm folder-chip active" data-folder="all">الكل</button>
+              <button class="btn-secondary btn-sm folder-chip" data-folder="pdf">ملفات PDF</button>
+              <button class="btn-secondary btn-sm folder-chip" data-folder="ppt">عروض PowerPoint</button>
+              <button class="btn-secondary btn-sm folder-chip" data-folder="admin">إداريات</button>
+            </div>
+            <div id="files-main-list"></div>
+          </div>
+        </div>
+
+        <!-- ================= SECTION: SCHEDULE ================= -->
+        <div id="content-schedule" class="app-content" style="display:none;" data-spec-id="content-schedule">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">الجدول الأسبوعي (السبت - الجمعة)</span>
+              <button id="btn-open-session-modal" data-spec-id="btn-open-session-modal" class="btn-primary btn-sm" style="width:auto;" type="button">
+                + إضافة موعد
+              </button>
+            </div>
+
+            <!-- Saturday to Friday Day Selector Strip -->
+            <div class="days-strip" id="schedule-days-strip">
+              <button class="day-chip active" data-day="Sat">السبت</button>
+              <button class="day-chip" data-day="Sun">الأحد</button>
+              <button class="day-chip" data-day="Mon">الاثنين</button>
+              <button class="day-chip" data-day="Tue">الثلاثاء</button>
+              <button class="day-chip" data-day="Wed">الأربعاء</button>
+              <button class="day-chip" data-day="Thu">الخميس</button>
+              <button class="day-chip" data-day="Fri">الجمعة</button>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin:10px 0 8px 0;">
+              <span id="active-day-heading" style="font-weight:700; font-size:14px;">حصص يوم السبت</span>
+              <button id="btn-toggle-view-mode" class="btn-secondary btn-sm" type="button">عرض الأسبوع كاملًا</button>
+            </div>
+
+            <div id="schedule-sessions-container"></div>
+          </div>
+
+          <!-- Schedule AI Assistant -->
+          <div class="assistant-box card">
+            <div class="assistant-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              مساعد تنظيم الجدول الذكي
+            </div>
+            <div id="schedule-assistant-content" style="font-size:12px; line-height:1.6;">
+              تحليل الجدول: لا توجد تعارضات في المواعيد الحالية. أوقاتك موزعة بسلاسة!
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SECTION: NOTES ================= -->
+        <div id="content-notes" class="app-content" style="display:none;" data-spec-id="content-notes">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">ملاحظاتي & Notepad</span>
+              <button id="btn-open-note-modal" data-spec-id="btn-open-note-modal" class="btn-primary btn-sm" style="width:auto;" type="button">
+                + ملاحظة جديدة
+              </button>
+            </div>
+            <div style="display:flex; gap:8px; margin-bottom:12px;">
+              <input type="text" id="notes-search-input" placeholder="البحث داخل الملاحظات..." style="flex:1;" />
+              <button id="btn-toggle-pinned-filter" class="btn-secondary btn-sm" type="button">المثبتة فقط</button>
+            </div>
+            <div id="notes-main-list"></div>
+          </div>
+
+          <!-- Notes AI Assistant -->
+          <div class="assistant-box card">
+            <div class="assistant-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              المساعد الذكي للملاحظات
+            </div>
+            <div id="notes-assistant-body" style="font-size:12px; line-height:1.6;">
+              اكتبي ملاحظاتكِ وسيقوم المساعد بتلخيص الأفكار واستخراج المهام وتحويلها لمواعيد في جدولكِ تلقائيًا.
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SECTION: WIRD ================= -->
+        <div id="content-wird" class="app-content" style="display:none;" data-spec-id="content-wird">
+          <!-- Daily Wird Setup Card -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">وردي اليومي</span>
+              <span id="wird-today-badge" class="note-tag" style="background:var(--sekai-accent-green-soft);">اليوم</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div>
+                <label class="form-label">نوع الورد القرآني</label>
+                <input type="text" id="wird-type-input" placeholder="مثال: سورة البقرة، أو الجزء الثالث عشر" />
+              </div>
+              <div style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                  <label class="form-label">المقدار</label>
+                  <input type="text" id="wird-amount-input" placeholder="مثال: حزب كامل / ٥ صفحات" />
+                </div>
+                <div style="flex:1;">
+                  <label class="form-label">وقت التذكير اليومي</label>
+                  <input type="time" id="wird-reminder-time" value="06:30" />
+                </div>
+              </div>
+              <button id="btn-wird-complete" data-spec-id="btn-wird-complete" class="btn-primary" type="button" style="margin-top:6px;">
+                تم الإنجاز ✓
+              </button>
+            </div>
+
+            <!-- Congratulations Message on complete -->
+            <div id="wird-congrats-box" class="wird-congrats" style="display:none;">
+              تقبّل الله منكِ، وجعل القرآن نورًا لقلبكِ وأيامكِ. 🌷
+            </div>
+          </div>
+
+          <!-- Commitment Rings & Stats -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">نسبة الالتزام بالورد</span>
+              <span class="card-sub">سجل الإنجازات</span>
+            </div>
+            <!-- // sekai-slot: images:wird-commitment-rings render=code why="commitment rings for weekly and monthly percentage" -->
+            <div class="wird-ring-wrap">
+              <div class="ring-box">
+                <div class="ring-circle" style="border: 5px solid var(--sekai-accent-pink); background: var(--sekai-accent-pink-soft);">
+                  <span id="wird-weekly-rate" class="ring-percent">100%</span>
+                </div>
+                <span class="ring-label">الالتزام الأسبوعي</span>
+              </div>
+              <div class="ring-box">
+                <div class="ring-circle" style="border: 5px solid var(--sekai-accent-green); background: var(--sekai-accent-green-soft);">
+                  <span id="wird-monthly-rate" class="ring-percent">100%</span>
+                </div>
+                <span class="ring-label">الالتزام الشهري</span>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--sekai-card-border); padding-top:10px; margin-top:6px;">
+              <span style="font-size:12px; font-weight:700; color:var(--sekai-muted);">سجل الأيام المنجزة مؤخرًا:</span>
+              <div id="wird-history-list" style="margin-top:8px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation Bar -->
+        <nav class="tab-bar">
+          <button class="tab-btn active" data-spec-id="tab-home" data-tab="home" type="button">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="tab-label">الرئيسية</span>
+          </button>
+          <button class="tab-btn" data-spec-id="tab-files" data-tab="files" type="button">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span class="tab-label">ملفاتي</span>
+          </button>
+          <button class="tab-btn" data-spec-id="tab-schedule" data-tab="schedule" type="button">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <span class="tab-label">جدولي</span>
+          </button>
+          <button class="tab-btn" data-spec-id="tab-notes" data-tab="notes" type="button">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <span class="tab-label">ملاحظاتي</span>
+          </button>
+          <button class="tab-btn" data-spec-id="tab-wird" data-tab="wird" type="button">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <span class="tab-label">وردي</span>
+          </button>
+        </nav>
+      </section>
+
+      <!-- ================= MODALS ================= -->
+      <!-- Add/Edit Session Modal -->
+      <div id="modal-session" class="modal-backdrop">
+        <div class="modal-sheet">
+          <div class="card-header" style="margin-bottom:0;">
+            <span class="card-title" id="modal-session-title">إضافة موعد أو حصة جديدة</span>
+            <button class="icon-btn btn-close-modal" type="button">✕</button>
+          </div>
+          <div>
+            <label class="form-label">اسم المجموعة / الحصة</label>
+            <input type="text" id="modal-session-name" placeholder="مثال: مجموعة الصف الثالث - لغة إنجليزية" />
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+              <label class="form-label">اليوم</label>
+              <select id="modal-session-day">
+                <option value="Sat">السبت</option>
+                <option value="Sun">الأحد</option>
+                <option value="Mon">الاثنين</option>
+                <option value="Tue">الثلاثاء</option>
+                <option value="Wed">الأربعاء</option>
+                <option value="Thu">الخميس</option>
+                <option value="Fri">الجمعة</option>
+              </select>
+            </div>
+            <div style="flex:1;">
+              <label class="form-label">الوقت</label>
+              <input type="time" id="modal-session-time" value="16:00" />
+            </div>
+          </div>
+          <div>
+            <label class="form-label">المكان أو الرابط</label>
+            <input type="text" id="modal-session-loc" placeholder="مثال: سنتر الأوائل / قاعة 2 أو Zoom" />
+          </div>
+          <div>
+            <label class="form-label">ملاحظات الحصة</label>
+            <input type="text" id="modal-session-note" placeholder="مثال: إحضار كشكول التمارين واختبار قصير" />
+          </div>
+          <button id="modal-session-save-btn" class="btn-primary" type="button">حفظ الحصة</button>
+        </div>
+      </div>
+
+      <!-- Add/Edit Note Modal -->
+      <div id="modal-note" class="modal-backdrop">
+        <div class="modal-sheet">
+          <div class="card-header" style="margin-bottom:0;">
+            <span class="card-title">تدوين ملاحظة جديدة</span>
+            <button class="icon-btn btn-close-modal" type="button">✕</button>
+          </div>
+          <div>
+            <label class="form-label">نص الملاحظة</label>
+            <textarea id="modal-note-text" rows="5" placeholder="اكتبي أفكاركِ، خططكِ، أو مهامكِ هنا..."></textarea>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+              <label class="form-label">التصنيف</label>
+              <select id="modal-note-category">
+                <option value="عام">عام</option>
+                <option value="تدريس">تدريس</option>
+                <option value="إدارة">إدارة</option>
+                <option value="أفكار">أفكار</option>
+                <option value="شخصي">شخصي</option>
+              </select>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; gap:8px; margin-top:20px;">
+              <input type="checkbox" id="modal-note-pin" style="width:20px; height:20px;" />
+              <label for="modal-note-pin" style="font-size:13px; font-weight:600;">تثبيت الملاحظة</label>
+            </div>
+          </div>
+          <button id="modal-note-save-btn" class="btn-primary" type="button">حفظ الملاحظة</button>
+        </div>
+      </div>
+
+      <!-- Toast Feedback -->
+      <div id="save-toast" data-spec-id="save-toast">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toast-text">تم الحفظ ✓</span>
+      </div>
+
+    </div>
+
+    <!-- MAIN APP JAVASCRIPT -->
+    <!-- app-session runtime replaced by ./app-bridge.js -->
+<script type="module">
+      import { applyAllEditableValues, getConfig, vibrate, createSaveShare } from './app-bridge.js';
+
+      //#region @sekai:state · workspace data and session state
+      // User provided / resolved logo asset slot:
+      const LOGO_URL = getConfig('images', 'user-image-1-523bf96d-df7d-48b3-bde1-010', '');
+
+      const store = createSaveShare();
+
+      // State model for Omnia Workspace
+      const DEFAULT_STATE = {
+        session: {
+          isLoggedIn: false,
+          userName: 'أمنية',
+          lang: 'ar',
+          theme: 'light',
+        },
+        files: [],
+        schedule: [
+          // Empty initial structure - user requested NO demo/dummy data
+        ],
+        notes: [],
+        wird: {
+          type: 'سورة يس وتلاوة ورد اليوم',
+          amount: 'حزب كامل',
+          reminderTime: '06:30',
+          todayDoneDate: null,
+          history: [] // array of ISO date strings
+        }
+      };
+
+      let S = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      let currentScreen = 'login';
+      let currentTab = 'home';
+      let activeScheduleDay = 'Sat';
+      let scheduleViewMode = 'day'; // 'day' or 'week'
+      let activeNotesFilter = 'all'; // 'all' or 'pinned'
+      let activeFolder = 'all';
+      let editingSessionId = null;
+      let editingNoteId = null;
+      //#endregion @sekai:state
+
+      //#region @sekai:ui-helpers · status, theme, and navigation helpers
+      function showToast(msg, isError = false) {
+        const toast = document.getElementById('save-toast');
+        const text = document.getElementById('toast-text');
+        text.textContent = msg;
+        toast.style.background = isError ? '#D9534F' : 'var(--sekai-ink)';
+        toast.classList.add('visible');
+        setTimeout(() => toast.classList.remove('visible'), 2400);
+      }
+
+      async function persistWorkspace(msg = 'تم الحفظ ✓') {
+        store.set('workspace', S);
+        try {
+          const res = await store.save('workspace');
+          if (res.code === 200) showToast(msg);
+          else if (res.code === 202) showToast(msg);
+          else showToast('جارٍ الحفظ في الخلفية...', false);
+        } catch (e) {
+          showToast('جارٍ الحفظ في الخلفية...', false);
+        }
+      }
+
+      function updateThemeAndLang() {
+        document.documentElement.setAttribute('data-theme', S.session.theme);
+        document.documentElement.setAttribute('dir', S.session.lang === 'ar' ? 'rtl' : 'ltr');
+        document.documentElement.setAttribute('lang', S.session.lang);
+
+        const langBtn = document.getElementById('btn-lang-toggle');
+        if (langBtn) langBtn.textContent = S.session.lang === 'ar' ? 'EN' : 'عربي';
+
+        // Update welcome text language matching name
+        const banner = document.getElementById('welcome-banner-text');
+        if (banner) {
+          if (S.session.lang === 'ar') {
+            banner.textContent = `أهلًا بكِ يا ${S.session.userName || 'أمنية'} 🌷\nهذه مساحتكِ الخاصة، رتّبي يومكِ، واحفظي أفكاركِ، وحققي إنجازاتكِ.\nكل يوم جديد فرصة لإنجاز شيء جميل.`;
+          } else {
+            banner.textContent = `Welcome, ${S.session.userName || 'Omnia'}! 🌷\nThis is your private space. Organize your day, keep your ideas, and achieve your goals.\nEvery new day is a chance to accomplish something beautiful.`;
+          }
+        }
+
+        const greet = document.getElementById('header-user-greet');
+        if (greet) greet.textContent = S.session.userName ? `ميس ${S.session.userName}` : 'ميس أمنية';
+
+        const dateStr = document.getElementById('dashboard-date-str');
+        if (dateStr) {
+          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          dateStr.textContent = new Date().toLocaleDateString(S.session.lang === 'ar' ? 'ar-EG' : 'en-US', options);
+        }
+      }
+
+      function switchScreen(screenName) {
+        currentScreen = screenName;
+        document.getElementById('screen-login').classList.toggle('active', screenName === 'login');
+        document.getElementById('screen-workspace').classList.toggle('active', screenName === 'workspace');
+      }
+
+      function switchTab(tabName) {
+        currentTab = tabName;
+        const contents = ['home', 'files', 'schedule', 'notes', 'wird'];
+        contents.forEach(c => {
+          const el = document.getElementById(`content-${c}`);
+          if (el) el.style.display = c === tabName ? 'flex' : 'none';
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.tab === tabName);
+        });
+        renderAllViews();
+      }
+      //#endregion @sekai:ui-helpers
+
+      //#region @sekai:render · workspace view rendering
+      function renderAllViews() {
+        renderDashboard();
+        renderFilesList();
+        renderSchedule();
+        renderNotes();
+        renderWird();
+      }
+
+      function renderDashboard() {
+        // 1. Upcoming session
+        const upcomingDetails = document.getElementById('upcoming-group-details');
+        const upName = document.getElementById('upcoming-name');
+        const upTime = document.getElementById('upcoming-time');
+        const upLoc = document.getElementById('upcoming-loc');
+
+        const now = new Date();
+        const daysMap = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const todayKey = daysMap[now.getDay()];
+
+        const todaySessions = S.schedule.filter(s => s.day === todayKey);
+        todaySessions.sort((a, b) => a.time.localeCompare(b.time));
+
+        if (todaySessions.length > 0) {
+          const next = todaySessions[0];
+          upName.textContent = next.name;
+          upTime.textContent = next.time;
+          upLoc.textContent = next.location ? `المكان: ${next.location}` : 'عبر الإنترنت';
+        } else {
+          upName.textContent = 'لا توجد مواعيد اليوم';
+          upTime.textContent = '--:--';
+          upLoc.textContent = 'استمتعي بيومكِ أو اضغطي «جدولي» لترتيب الحصص';
+        }
+
+        // 2. Today's list in dashboard
+        const todayContainer = document.getElementById('dashboard-today-list');
+        if (todaySessions.length === 0) {
+          todayContainer.innerHTML = `
+            <div class="empty-state">
+              <svg class="empty-sprig" viewBox="0 0 24 24" fill="none"><path d="M12 22v-8m0 0C8 14 4 10 4 4c6 0 8 4 8 10zm0 0c4 0 8-4 8-10-6 0-8 4-8 10z"/></svg>
+              <div class="empty-text">لا توجد حصص مسجلة لهذا اليوم</div>
+            </div>`;
+        } else {
+          todayContainer.innerHTML = todaySessions.map(s => `
+            <div class="session-card">
+              <div class="session-top">
+                <span class="session-name">${s.name}</span>
+                <span class="session-time">${s.time}</span>
+              </div>
+              <div class="session-loc">${s.location || 'أونلاين'}</div>
+              ${s.note ? `<div class="session-note">${s.note}</div>` : ''}
+            </div>
+          `).join('');
+        }
+
+        // 3. Wird summary on dashboard
+        const wirdSum = document.getElementById('dashboard-wird-summary');
+        const todayDate = new Date().toISOString().slice(0, 10);
+        const isDoneToday = S.wird.todayDoneDate === todayDate;
+        wirdSum.innerHTML = `
+          <div>الورد الحالي: <strong>${S.wird.type || 'تلاوة اليوم'}</strong> (${S.wird.amount || 'حزب'})</div>
+          <div style="margin-top:4px; color:${isDoneToday ? 'var(--sekai-accent-green)' : 'var(--sekai-muted)'};">
+            الحالة: ${isDoneToday ? 'تم إنجاز ورد اليوم بنجاح ✓' : 'في انتظار الإنجاز اليوم'}
+          </div>
+        `;
+
+        // 4. Notes snippet on dashboard
+        const notesList = document.getElementById('dashboard-notes-list');
+        if (S.notes.length === 0) {
+          notesList.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-text">لا توجد ملاحظات حالياً</div>
+            </div>`;
+        } else {
+          notesList.innerHTML = S.notes.slice(0, 2).map(n => `
+            <div class="note-card" style="margin-bottom:6px;">
+              <div class="note-top">
+                <span class="note-tag">${n.category}</span>
+                <span class="note-date">${n.date}</span>
+              </div>
+              <div class="note-text">${n.text}</div>
+            </div>
+          `).join('');
+        }
+
+        // 5. Recent Files snippet
+        const filesList = document.getElementById('dashboard-files-list');
+        if (S.files.length === 0) {
+          filesList.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-text">لم يتم رفع ملفات بعد</div>
+            </div>`;
+        } else {
+          filesList.innerHTML = S.files.slice(0, 2).map(f => `
+            <div class="file-item">
+              <div class="file-meta">
+                <div class="file-icon-badge">${f.type.toUpperCase()}</div>
+                <div class="file-info">
+                  <div class="file-name-text">${f.name}</div>
+                  <div class="file-size-date">${f.size} • ${f.date}</div>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // 6. Pending Tasks
+        const tasksList = document.getElementById('dashboard-tasks-list');
+        const tasks = [];
+        if (!isDoneToday) tasks.push('إنجاز الورد القرآني اليومي');
+        if (todaySessions.length > 0) tasks.push(`متابعة تحضير ${todaySessions.length} حصة لليوم`);
+        if (S.notes.some(n => n.category === 'إدارة')) tasks.push('مراجعة الملاحظات الإدارية المعلقة');
+
+        if (tasks.length === 0) {
+          tasksList.innerHTML = `<div style="font-size:13px; color:var(--sekai-accent-green); font-weight:600;">رائع يا أمنية! أنجزتِ جميع مهام اليوم الأساسية.</div>`;
+        } else {
+          tasksList.innerHTML = tasks.map(t => `
+            <div style="font-size:13px; padding:6px 0; border-bottom:1px dashed var(--sekai-card-border); display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--sekai-accent-pink); font-size:16px;">•</span>
+              <span>${t}</span>
+            </div>
+          `).join('');
+        }
+      }
+
+      function renderFilesList() {
+        const countBadge = document.getElementById('files-count-badge');
+        const container = document.getElementById('files-main-list');
+        const query = (document.getElementById('files-search-input')?.value || '').toLowerCase().trim();
+
+        let filtered = S.files;
+        if (activeFolder === 'pdf') filtered = filtered.filter(f => f.type === 'pdf');
+        if (activeFolder === 'ppt') filtered = filtered.filter(f => f.type === 'ppt' || f.type === 'pptx');
+        if (activeFolder === 'admin') filtered = filtered.filter(f => f.category === 'admin');
+
+        if (query) {
+          filtered = filtered.filter(f => f.name.toLowerCase().includes(query));
+        }
+
+        if (countBadge) countBadge.textContent = `${filtered.length} ملف`;
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <svg class="empty-sprig" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div class="empty-text">لا توجد ملفات مطابقة</div>
+              <button id="btn-empty-upload" class="btn-secondary btn-sm" type="button">أضيفي أول ملف الآن</button>
+            </div>`;
+          const emptyBtn = document.getElementById('btn-empty-upload');
+          if (emptyBtn) emptyBtn.addEventListener('click', () => document.getElementById('real-file-input').click());
+          return;
+        }
+
+        container.innerHTML = filtered.map(f => `
+          <div class="file-item">
+            <div class="file-meta">
+              <div class="file-icon-badge">${f.type.toUpperCase()}</div>
+              <div class="file-info">
+                <div class="file-name-text">${f.name}</div>
+                <div class="file-size-date">${f.size} • ${f.date}</div>
+              </div>
+            </div>
+            <div class="file-actions">
+              <button class="icon-btn btn-download-file" data-id="${f.id}" title="تنزيل">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </button>
+              <button class="icon-btn btn-delete-file" data-id="${f.id}" title="حذف" style="color:#D9534F;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </div>
+        `).join('');
+
+        // Wire download and delete actions
+        container.querySelectorAll('.btn-download-file').forEach(b => {
+          b.addEventListener('click', (e) => {
+            const id = e.currentTarget.dataset.id;
+            const file = S.files.find(item => item.id === id);
+            if (file) {
+              showToast('بدء تنزيل الملف');
+              window.OmniaAPI.downloadFile(file).catch(() => showToast('تعذّر تنزيل الملف', true));
+            }
+          });
+        });
+
+        container.querySelectorAll('.btn-delete-file').forEach(b => {
+          b.addEventListener('click', async (e) => {
+            const id = e.currentTarget.dataset.id;
+            if (confirm('هل ترغبين بحذف هذا الملف؟')) {
+              try {
+                await window.OmniaAPI.deleteFile(id);
+              } catch (err) {
+                showToast('تعذّر حذف الملف', true);
+                return;
+              }
+              S.files = S.files.filter(item => item.id !== id);
+              await persistWorkspace('تم حذف الملف');
+              renderFilesList();
+              renderDashboard();
+            }
+          });
+        });
+      }
+
+      function detectScheduleConflicts() {
+        const conflicts = new Set();
+        const days = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+
+        days.forEach(day => {
+          const sessions = S.schedule.filter(s => s.day === day);
+          for (let i = 0; i < sessions.length; i++) {
+            for (let j = i + 1; j < sessions.length; j++) {
+              if (sessions[i].time === sessions[j].time) {
+                conflicts.add(sessions[i].id);
+                conflicts.add(sessions[j].id);
+              }
+            }
+          }
+        });
+        return conflicts;
+      }
+
+      function renderSchedule() {
+        const container = document.getElementById('schedule-sessions-container');
+        const heading = document.getElementById('active-day-heading');
+        const dayNamesMap = {
+          Sat: 'السبت', Sun: 'الأحد', Mon: 'الاثنين',
+          Tue: 'الثلاثاء', Wed: 'الأربعاء', Thu: 'الخميس', Fri: 'الجمعة'
+        };
+
+        const conflicts = detectScheduleConflicts();
+
+        // Update Assistant
+        const assistContent = document.getElementById('schedule-assistant-content');
+        if (conflicts.size > 0) {
+          assistContent.innerHTML = `<span style="color:#D9534F; font-weight:700;">تنبيه: يوجد تعارض في مواعيد الحصص!</span> تم تمييز الحصص المتعارضة باللون الوردي لإعادة ترتيبها.`;
+        } else {
+          assistContent.innerHTML = `جدولك الأسبوعي متوازن ومنظم، إجمالي الحصص: ${S.schedule.length} حصة. يمكنك توزيع المجموعات المتقاربة لراحة أكبر.`;
+        }
+
+        let displayed = [];
+        if (scheduleViewMode === 'day') {
+          heading.textContent = `حصص يوم ${dayNamesMap[activeScheduleDay]}`;
+          displayed = S.schedule.filter(s => s.day === activeScheduleDay);
+        } else {
+          heading.textContent = 'جدول الأسبوع كاملًا';
+          displayed = [...S.schedule];
+        }
+
+        displayed.sort((a, b) => a.time.localeCompare(b.time));
+
+        if (displayed.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <svg class="empty-sprig" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+              <div class="empty-text">لا توجد حصص مسجلة في هذا اليوم</div>
+              <button id="btn-empty-session" class="btn-secondary btn-sm" type="button">أضيفي موعد حصة</button>
+            </div>`;
+          const emptyBtn = document.getElementById('btn-empty-session');
+          if (emptyBtn) emptyBtn.addEventListener('click', () => openSessionModal());
+          return;
+        }
+
+        container.innerHTML = displayed.map(s => {
+          const isConflict = conflicts.has(s.id);
+          return `
+            <div class="session-card ${isConflict ? 'conflict' : ''}" data-id="${s.id}">
+              <div class="session-top">
+                <span class="session-name">${s.name} ${scheduleViewMode === 'week' ? `(${dayNamesMap[s.day]})` : ''}</span>
+                <span class="session-time">${s.time}</span>
+              </div>
+              <div class="session-loc">${s.location || 'عبر الإنترنت'}</div>
+              ${s.note ? `<div class="session-note">${s.note}</div>` : ''}
+              <div style="display:flex; justify-content:flex-end; gap:6px; margin-top:6px;">
+                <button class="btn-secondary btn-sm btn-edit-session" data-id="${s.id}">تعديل</button>
+                <button class="btn-secondary btn-sm btn-del-session" data-id="${s.id}" style="color:#D9534F;">حذف</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        container.querySelectorAll('.btn-edit-session').forEach(b => {
+          b.addEventListener('click', (e) => {
+            const id = e.currentTarget.dataset.id;
+            openSessionModal(id);
+          });
+        });
+
+        container.querySelectorAll('.btn-del-session').forEach(b => {
+          b.addEventListener('click', async (e) => {
+            const id = e.currentTarget.dataset.id;
+            if (confirm('هل ترغبين بحذف هذا الموعد من الجدول؟')) {
+              S.schedule = S.schedule.filter(item => item.id !== id);
+              await persistWorkspace('تم حذف الحصة');
+              renderSchedule();
+              renderDashboard();
+            }
+          });
+        });
+      }
+
+      function renderNotes() {
+        const container = document.getElementById('notes-main-list');
+        const query = (document.getElementById('notes-search-input')?.value || '').toLowerCase().trim();
+
+        let filtered = S.notes;
+        if (activeNotesFilter === 'pinned') {
+          filtered = filtered.filter(n => n.pinned);
+        }
+        if (query) {
+          filtered = filtered.filter(n => n.text.toLowerCase().includes(query) || (n.category && n.category.toLowerCase().includes(query)));
+        }
+
+        // Pinned on top
+        filtered.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <svg class="empty-sprig" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              <div class="empty-text">لا توجد ملاحظات مسجلة</div>
+              <button id="btn-empty-note" class="btn-secondary btn-sm" type="button">اكتبي أول فكرة أو ملاحظة</button>
+            </div>`;
+          const emptyBtn = document.getElementById('btn-empty-note');
+          if (emptyBtn) emptyBtn.addEventListener('click', () => openNoteModal());
+          return;
+        }
+
+        container.innerHTML = filtered.map(n => `
+          <div class="note-card ${n.pinned ? 'pinned' : ''}" data-id="${n.id}">
+            <div class="note-top">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="note-tag">${n.category}</span>
+                ${n.pinned ? '<span style="font-size:12px; color:var(--sekai-accent-pink);">📌 مثبتة</span>' : ''}
+              </div>
+              <span class="note-date">${n.date}</span>
+            </div>
+            <div class="note-text">${n.text}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; border-top:1px dashed var(--sekai-card-border); padding-top:6px;">
+              <button class="btn-secondary btn-sm btn-convert-task" data-id="${n.id}">حوّليها لحصة في الجدول</button>
+              <div style="display:flex; gap:6px;">
+                <button class="icon-btn btn-pin-note" data-id="${n.id}" title="${n.pinned ? 'إلغاء التثبيت' : 'تثبيت'}">
+                  📌
+                </button>
+                <button class="icon-btn btn-del-note" data-id="${n.id}" title="حذف" style="color:#D9534F;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        container.querySelectorAll('.btn-pin-note').forEach(b => {
+          b.addEventListener('click', async (e) => {
+            const id = e.currentTarget.dataset.id;
+            const note = S.notes.find(item => item.id === id);
+            if (note) {
+              note.pinned = !note.pinned;
+              await persistWorkspace('تم تحديث التثبيت');
+              renderNotes();
+            }
+          });
+        });
+
+        container.querySelectorAll('.btn-del-note').forEach(b => {
+          b.addEventListener('click', async (e) => {
+            const id = e.currentTarget.dataset.id;
+            if (confirm('هل ترغبين بحذف هذه الملاحظة؟')) {
+              S.notes = S.notes.filter(item => item.id !== id);
+              await persistWorkspace('تم حذف الملاحظة');
+              renderNotes();
+              renderDashboard();
+            }
+          });
+        });
+
+        container.querySelectorAll('.btn-convert-task').forEach(b => {
+          b.addEventListener('click', (e) => {
+            const id = e.currentTarget.dataset.id;
+            const note = S.notes.find(item => item.id === id);
+            if (note) {
+              openSessionModal(null, {
+                name: note.text.slice(0, 30),
+                note: note.text
+              });
+            }
+          });
+        });
+      }
+
+      function renderWird() {
+        const typeInput = document.getElementById('wird-type-input');
+        const amountInput = document.getElementById('wird-amount-input');
+        const reminderTime = document.getElementById('wird-reminder-time');
+        const congratsBox = document.getElementById('wird-congrats-box');
+        const weeklyRateEl = document.getElementById('wird-weekly-rate');
+        const monthlyRateEl = document.getElementById('wird-monthly-rate');
+        const historyContainer = document.getElementById('wird-history-list');
+
+        if (typeInput) typeInput.value = S.wird.type || '';
+        if (amountInput) amountInput.value = S.wird.amount || '';
+        if (reminderTime) reminderTime.value = S.wird.reminderTime || '06:30';
+
+        const todayDate = new Date().toISOString().slice(0, 10);
+        const isDoneToday = S.wird.todayDoneDate === todayDate;
+
+        if (congratsBox) {
+          congratsBox.style.display = isDoneToday ? 'block' : 'none';
+        }
+
+        // Calculate commitments: based on last 7 and 30 days
+        const last7 = S.wird.history.filter(d => {
+          const diff = (new Date() - new Date(d)) / (1000 * 60 * 60 * 24);
+          return diff <= 7;
+        }).length;
+        const weekRate = Math.min(100, Math.round(((last7 + (isDoneToday ? 1 : 0)) / 7) * 100)) || (isDoneToday ? 100 : 0);
+
+        const last30 = S.wird.history.filter(d => {
+          const diff = (new Date() - new Date(d)) / (1000 * 60 * 60 * 24);
+          return diff <= 30;
+        }).length;
+        const monthRate = Math.min(100, Math.round(((last30 + (isDoneToday ? 1 : 0)) / 30) * 100)) || (isDoneToday ? 100 : 0);
+
+        if (weeklyRateEl) weeklyRateEl.textContent = `${weekRate}%`;
+        if (monthlyRateEl) monthlyRateEl.textContent = `${monthRate}%`;
+
+        if (historyContainer) {
+          if (S.wird.history.length === 0 && !isDoneToday) {
+            historyContainer.innerHTML = '<div style="font-size:12px; color:var(--sekai-muted);">لم يتم تسجيل إنجازات بعد. ابدئي ورد اليوم!</div>';
+          } else {
+            const allDates = [...(isDoneToday ? [todayDate] : []), ...S.wird.history];
+            const unique = [...new Set(allDates)].slice(0, 5);
+            historyContainer.innerHTML = unique.map(d => `
+              <div style="font-size:12px; padding:4px 0; color:var(--sekai-ink); display:flex; align-items:center; gap:6px;">
+                <span style="color:var(--sekai-accent-green);">✓</span>
+                <span>تم إنجاز ورد يوم ${d}</span>
+              </div>
+            `).join('');
+          }
+        }
+      }
+      //#endregion @sekai:render
+
+      //#region @sekai:modals · schedule and note dialogs
+      function openSessionModal(sessionId = null, prefill = null) {
+        editingSessionId = sessionId;
+        const modal = document.getElementById('modal-session');
+        const title = document.getElementById('modal-session-title');
+        const nameInput = document.getElementById('modal-session-name');
+        const dayInput = document.getElementById('modal-session-day');
+        const timeInput = document.getElementById('modal-session-time');
+        const locInput = document.getElementById('modal-session-loc');
+        const noteInput = document.getElementById('modal-session-note');
+
+        if (sessionId) {
+          const session = S.schedule.find(s => s.id === sessionId);
+          if (session) {
+            title.textContent = 'تعديل موعد الحصة';
+            nameInput.value = session.name;
+            dayInput.value = session.day;
+            timeInput.value = session.time;
+            locInput.value = session.location || '';
+            noteInput.value = session.note || '';
+          }
+        } else {
+          title.textContent = 'إضافة موعد أو حصة جديدة';
+          nameInput.value = prefill?.name || '';
+          dayInput.value = activeScheduleDay;
+          timeInput.value = '16:00';
+          locInput.value = '';
+          noteInput.value = prefill?.note || '';
+        }
+        modal.classList.add('open');
+      }
+
+      function openNoteModal(noteId = null) {
+        editingNoteId = noteId;
+        const modal = document.getElementById('modal-note');
+        const textInput = document.getElementById('modal-note-text');
+        const catInput = document.getElementById('modal-note-category');
+        const pinInput = document.getElementById('modal-note-pin');
+
+        if (noteId) {
+          const note = S.notes.find(n => n.id === noteId);
+          if (note) {
+            textInput.value = note.text;
+            catInput.value = note.category || 'عام';
+            pinInput.checked = !!note.pinned;
+          }
+        } else {
+          textInput.value = '';
+          catInput.value = 'عام';
+          pinInput.checked = false;
+        }
+        modal.classList.add('open');
+      }
+
+      function closeAllModals() {
+        document.querySelectorAll('.modal-backdrop').forEach(m => m.classList.remove('open'));
+        editingSessionId = null;
+        editingNoteId = null;
+      }
+      //#endregion @sekai:modals
+
+      //#region @sekai:input · interactive handlers and persistence
+      function setupEventListeners() {
+        // 1. Login flow
+        const loginBtn = document.getElementById('login-submit-btn');
+        const nameInput = document.getElementById('login-name-input');
+        const passInput = document.getElementById('login-pass-input');
+        const loginError = document.getElementById('login-error-msg');
+
+        let authMode = 'login';
+        const emailInput = document.getElementById('login-email-input');
+        const authToggle = document.getElementById('auth-mode-toggle');
+        const submitBtn = document.getElementById('login-submit-btn');
+
+        authToggle.addEventListener('click', () => {
+          authMode = authMode === 'login' ? 'register' : 'login';
+          const isRegister = authMode === 'register';
+          submitBtn.textContent = isRegister ? 'إنشاء حساب جديد' : 'تسجيل الدخول';
+          authToggle.textContent = isRegister
+            ? 'لديكِ حساب بالفعل؟ تسجيل الدخول'
+            : 'ليس لديكِ حساب؟ إنشاء حساب جديد';
+          passInput.setAttribute('autocomplete', isRegister ? 'new-password' : 'current-password');
+          loginError.textContent = '';
+        });
+
+        async function finishAuth() {
+          const me = await window.OmniaAPI.me();
+          const loaded = await store.load('workspace');
+          if (loaded.code === 200 && loaded.data && loaded.data.value && Object.keys(loaded.data.value).length) {
+            S = loaded.data.value;
+          } else {
+            S = JSON.parse(JSON.stringify(DEFAULT_STATE));
+          }
+          S.session.isLoggedIn = true;
+          S.session.userName = me.user.name;
+          S.session.lang = /[\u0600-\u06FF]/.test(me.user.name) ? 'ar' : 'en';
+          nameInput.value = '';
+          passInput.value = '';
+          emailInput.value = '';
+          await persistWorkspace('مرحباً بكِ في مساحتكِ الخاصة');
+          updateThemeAndLang();
+          renderAllViews();
+          switchScreen('workspace');
+          switchTab('home');
+          vibrate(50);
+        }
+
+        loginBtn.addEventListener('click', async () => {
+          const name = nameInput.value.trim();
+          const email = emailInput.value.trim();
+          const pass = passInput.value;
+
+          loginError.textContent = '';
+          if (authMode === 'register' && !name) {
+            loginError.textContent = 'يرجى كتابة الاسم أولاً';
+            return;
+          }
+          if (!email) {
+            loginError.textContent = 'يرجى كتابة البريد الإلكتروني';
+            return;
+          }
+          if (!pass) {
+            loginError.textContent = 'يرجى كتابة كلمة المرور';
+            return;
+          }
+
+          loginBtn.disabled = true;
+          try {
+            if (authMode === 'register') {
+              await window.OmniaAPI.register({ name, email, password: pass });
+            } else {
+              await window.OmniaAPI.login({ email, password: pass });
+            }
+            await finishAuth();
+          } catch (err) {
+            loginError.textContent = err.message || 'تعذّر إكمال العملية، يرجى المحاولة';
+            vibrate(100);
+          } finally {
+            loginBtn.disabled = false;
+          }
+        });
+
+        // 2. Header actions
+        document.getElementById('btn-logout').addEventListener('click', async () => {
+          try { await window.OmniaAPI.logout(); } catch (_) { /* ignore */ }
+          S = JSON.parse(JSON.stringify(DEFAULT_STATE));
+          nameInput.value = '';
+          passInput.value = '';
+          if (emailInput) emailInput.value = '';
+          loginError.textContent = '';
+          updateThemeAndLang();
+          switchScreen('login');
+        });
+
+        document.getElementById('btn-theme-toggle').addEventListener('click', async () => {
+          S.session.theme = S.session.theme === 'light' ? 'dark' : 'light';
+          updateThemeAndLang();
+          await persistWorkspace('تم تغيير المظهر');
+        });
+
+        document.getElementById('btn-lang-toggle').addEventListener('click', async () => {
+          S.session.lang = S.session.lang === 'ar' ? 'en' : 'ar';
+          updateThemeAndLang();
+          await persistWorkspace('Language switched');
+        });
+
+        // 3. Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            switchTab(btn.dataset.tab);
+            vibrate(30);
+          });
+        });
+
+        // 4. Quick actions on dashboard
+        document.getElementById('btn-quick-add-session')?.addEventListener('click', () => openSessionModal());
+        document.getElementById('btn-quick-add-note')?.addEventListener('click', () => openNoteModal());
+        document.getElementById('btn-quick-upload-file')?.addEventListener('click', () => document.getElementById('real-file-input').click());
+        document.getElementById('btn-dashboard-wird-done')?.addEventListener('click', async () => {
+          const todayDate = new Date().toISOString().slice(0, 10);
+          S.wird.todayDoneDate = todayDate;
+          if (!S.wird.history.includes(todayDate)) {
+            S.wird.history.unshift(todayDate);
+          }
+          await persistWorkspace('تقبّل الله منكِ 🌷');
+          renderAllViews();
+          vibrate(80);
+        });
+
+        // 5. Wird Section
+        document.getElementById('btn-wird-complete')?.addEventListener('click', async () => {
+          const type = document.getElementById('wird-type-input')?.value.trim();
+          const amount = document.getElementById('wird-amount-input')?.value.trim();
+          const time = document.getElementById('wird-reminder-time')?.value;
+
+          if (type) S.wird.type = type;
+          if (amount) S.wird.amount = amount;
+          if (time) S.wird.reminderTime = time;
+
+          const todayDate = new Date().toISOString().slice(0, 10);
+          S.wird.todayDoneDate = todayDate;
+          if (!S.wird.history.includes(todayDate)) {
+            S.wird.history.unshift(todayDate);
+          }
+
+          await persistWorkspace('تقبّل الله منكِ، وجعل القرآن نورًا لقلبكِ وأيامكِ');
+          renderWird();
+          renderDashboard();
+          vibrate(80);
+        });
+
+        // 6. Schedule Day Selector
+        document.querySelectorAll('#schedule-days-strip .day-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            document.querySelectorAll('#schedule-days-strip .day-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            activeScheduleDay = chip.dataset.day;
+            renderSchedule();
+          });
+        });
+
+        document.getElementById('btn-toggle-view-mode')?.addEventListener('click', () => {
+          scheduleViewMode = scheduleViewMode === 'day' ? 'week' : 'day';
+          document.getElementById('btn-toggle-view-mode').textContent = scheduleViewMode === 'day' ? 'عرض الأسبوع كاملًا' : 'عرض اليوم فقط';
+          renderSchedule();
+        });
+
+        document.getElementById('btn-open-session-modal')?.addEventListener('click', () => openSessionModal());
+
+        // 7. Session Modal Save
+        document.getElementById('modal-session-save-btn')?.addEventListener('click', async () => {
+          const name = document.getElementById('modal-session-name').value.trim();
+          const day = document.getElementById('modal-session-day').value;
+          const time = document.getElementById('modal-session-time').value;
+          const loc = document.getElementById('modal-session-loc').value.trim();
+          const note = document.getElementById('modal-session-note').value.trim();
+
+          if (!name) {
+            alert('يرجى إدخال اسم المجموعة أو الحصة');
+            return;
+          }
+
+          if (editingSessionId) {
+            const idx = S.schedule.findIndex(s => s.id === editingSessionId);
+            if (idx >= 0) {
+              S.schedule[idx] = { id: editingSessionId, name, day, time, location: loc, note };
+            }
+          } else {
+            S.schedule.push({
+              id: 'sess_' + Date.now(),
+              name, day, time, location: loc, note
+            });
+          }
+
+          await persistWorkspace('تم حفظ موعد الحصة');
+          closeAllModals();
+          renderSchedule();
+          renderDashboard();
+        });
+
+        // 8. Notes Section
+        document.getElementById('btn-open-note-modal')?.addEventListener('click', () => openNoteModal());
+        document.getElementById('modal-note-save-btn')?.addEventListener('click', async () => {
+          const text = document.getElementById('modal-note-text').value.trim();
+          const category = document.getElementById('modal-note-category').value;
+          const pinned = document.getElementById('modal-note-pin').checked;
+
+          if (!text) {
+            alert('يرجى كتابة نص الملاحظة');
+            return;
+          }
+
+          const dateStr = new Date().toLocaleDateString('ar-EG', { month: 'short', day: 'numeric' });
+          if (editingNoteId) {
+            const idx = S.notes.findIndex(n => n.id === editingNoteId);
+            if (idx >= 0) {
+              S.notes[idx].text = text;
+              S.notes[idx].category = category;
+              S.notes[idx].pinned = pinned;
+            }
+          } else {
+            S.notes.unshift({
+              id: 'note_' + Date.now(),
+              text, category, pinned, date: dateStr
+            });
+          }
+
+          await persistWorkspace('تم حفظ الملاحظة تلقائيًا');
+          closeAllModals();
+          renderNotes();
+          renderDashboard();
+        });
+
+        document.getElementById('notes-search-input')?.addEventListener('input', () => renderNotes());
+        document.getElementById('btn-toggle-pinned-filter')?.addEventListener('click', () => {
+          activeNotesFilter = activeNotesFilter === 'all' ? 'pinned' : 'all';
+          document.getElementById('btn-toggle-pinned-filter').classList.toggle('active', activeNotesFilter === 'pinned');
+          renderNotes();
+        });
+
+        // 9. Files Section
+        document.getElementById('btn-upload-file')?.addEventListener('click', () => {
+          document.getElementById('real-file-input').click();
+        });
+        document.getElementById('real-file-input')?.addEventListener('change', async (e) => {
+          const input = e.target;
+          const file = input.files[0];
+          if (!file) return;
+
+          try {
+            const res = await window.OmniaAPI.uploadFile(file, 'admin');
+            const f = res.file;
+            const sizeStr = `${(f.size / 1024).toFixed(1)} KB`;
+            const dateStr = new Date().toLocaleDateString('ar-EG', { month: 'short', day: 'numeric' });
+
+            S.files.unshift({
+              id: f.id,
+              name: f.name,
+              type: f.type,
+              size: sizeStr,
+              date: dateStr,
+              category: 'admin',
+              downloadUrl: f.downloadUrl
+            });
+
+            await persistWorkspace('تم حفظ الملف سحابياً بنجاح');
+            renderFilesList();
+            renderDashboard();
+          } catch (err) {
+            showToast(err.message || 'تعذّر رفع الملف', true);
+          } finally {
+            input.value = '';
+          }
+        });
+
+        document.querySelectorAll('.folder-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            document.querySelectorAll('.folder-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            activeFolder = chip.dataset.folder;
+            renderFilesList();
+          });
+        });
+        document.getElementById('files-search-input')?.addEventListener('input', () => renderFilesList());
+
+        // Close buttons for modals
+        document.querySelectorAll('.btn-close-modal').forEach(b => {
+          b.addEventListener('click', closeAllModals);
+        });
+        document.querySelectorAll('.modal-backdrop').forEach(m => {
+          m.addEventListener('click', (e) => {
+            if (e.target === m) closeAllModals();
+          });
+        });
+      }
+      //#endregion @sekai:input
+
+      //#region @sekai:init · bridge setup and state restoration
+      async function initApp() {
+        applyAllEditableValues();
+
+        // Bind Logo image to both login and header elements
+        const loginLogo = document.getElementById('login-logo-img');
+        const headerLogo = document.getElementById('header-logo-img');
+        if (loginLogo) loginLogo.src = getConfig('images', 'user-image-1-523bf96d-df7d-48b3-bde1-010', '');
+        if (headerLogo) headerLogo.src = getConfig('images', 'user-image-1-523bf96d-df7d-48b3-bde1-010', '');
+
+        // Restore session + persisted workspace only when the cookie is valid.
+        let authedUser = null;
+        try {
+          const me = await window.OmniaAPI.me();
+          authedUser = me.user;
+        } catch (e) {
+          authedUser = null;
+        }
+
+        if (authedUser) {
+          try {
+            const loaded = await store.load('workspace');
+            if (loaded.code === 200 && loaded.data && loaded.data.value && Object.keys(loaded.data.value).length) {
+              S = loaded.data.value;
+            }
+          } catch (e) {
+            // Keep defaults
+          }
+          S.session.isLoggedIn = true;
+          S.session.userName = authedUser.name;
+          S.session.lang = /[\u0600-\u06FF]/.test(authedUser.name) ? 'ar' : 'en';
+        }
+
+        setupEventListeners();
+        updateThemeAndLang();
+
+        if (authedUser) {
+          switchScreen('workspace');
+          switchTab('home');
+        } else {
+          S.session.isLoggedIn = false;
+          S.session.userName = '';
+          document.getElementById('login-name-input').value = '';
+          document.getElementById('login-pass-input').value = '';
+          document.getElementById('login-email-input').value = '';
+          switchScreen('login');
+        }
+
+        renderAllViews();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+      } else {
+        initApp();
+      }
+      //#endregion @sekai:init
+
+      //#region @sekai:contract · debug state and contract declaration
+      window.sekaiDebug = {
+        state() {
+          return {
+            name: currentScreen === 'login' ? 'login' : 'workspace',
+            isLoggedIn: S.session.isLoggedIn,
+            currentTab: currentTab,
+            filesCount: S.files.length,
+            scheduleCount: S.schedule.length,
+            notesCount: S.notes.length
+          };
+        },
+        reset() {
+          S.session.isLoggedIn = false;
+          switchScreen('login');
+        },
+        signIn(name = 'أمنية') {
+          S.session.isLoggedIn = true;
+          S.session.userName = name;
+          switchScreen('workspace');
+          switchTab('home');
+        }
+      };
+
+      window.sekaiContract = {
+        version: 2,
+        states: [
+          { name: 'login', role: 'initial' },
+          { name: 'workspace', role: 'active' }
+        ],
+        interactable: [
+          { id: 'login-submit-btn', selector: '#login-submit-btn', kind: 'button', action: 'tap', expect: 'state_change' },
+          { id: 'tab-home', selector: '[data-spec-id="tab-home"]', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'tab-files', selector: '[data-spec-id="tab-files"]', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'tab-schedule', selector: '[data-spec-id="tab-schedule"]', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'tab-notes', selector: '[data-spec-id="tab-notes"]', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'tab-wird', selector: '[data-spec-id="tab-wird"]', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'btn-open-session-modal', selector: '#btn-open-session-modal', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'btn-open-note-modal', selector: '#btn-open-note-modal', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'btn-wird-complete', selector: '#btn-wird-complete', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'btn-theme-toggle', selector: '#btn-theme-toggle', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'btn-lang-toggle', selector: '#btn-lang-toggle', kind: 'button', action: 'tap', expect: 'field_change' },
+          { id: 'btn-logout', selector: '#btn-logout', kind: 'button', action: 'tap', expect: 'state_change' }
+        ],
+        actions: [
+          { name: 'login', method: 'sekaiDebug.signIn', pre: { name: 'login' }, post: { name: 'workspace' } },
+          { name: 'reset', method: 'sekaiDebug.reset', post: { name: 'login' } }
+        ]
+      };
+      //#endregion @sekai:contract
+    </script>
+
+    <!-- Sekai Manifest: Spec Ledger -->
+    <script id="sekai-manifest" type="application/json">
+    {
+      "version": 1,
+      "elements": [
+        {"id": "screen-login", "kind": "container", "selector": "#screen-login"},
+        {"id": "login-logo-img", "kind": "visual", "selector": "#login-logo-img"},
+        {"id": "login-title", "kind": "text", "selector": "#login-title", "asserted": {"contains": "Omnia"}},
+        {"id": "login-name-input", "kind": "interactive", "selector": "#login-name-input"},
+        {"id": "login-pass-input", "kind": "interactive", "selector": "#login-pass-input"},
+        {"id": "login-error-msg", "kind": "text", "selector": "#login-error-msg"},
+        {"id": "login-submit-btn", "kind": "interactive", "selector": "#login-submit-btn", "label": "تسجيل الدخول"},
+        {"id": "screen-workspace", "kind": "container", "selector": "#screen-workspace"},
+        {"id": "header-logo-img", "kind": "visual", "selector": "#header-logo-img"},
+        {"id": "btn-theme-toggle", "kind": "interactive", "selector": "#btn-theme-toggle"},
+        {"id": "btn-lang-toggle", "kind": "interactive", "selector": "#btn-lang-toggle"},
+        {"id": "btn-logout", "kind": "interactive", "selector": "#btn-logout"},
+        {"id": "welcome-banner-text", "kind": "text", "selector": "#welcome-banner-text", "asserted": {"contains": "أمنية"}},
+        {"id": "content-home", "kind": "container", "selector": "#content-home"},
+        {"id": "content-files", "kind": "container", "selector": "#content-files"},
+        {"id": "content-schedule", "kind": "container", "selector": "#content-schedule"},
+        {"id": "content-notes", "kind": "container", "selector": "#content-notes"},
+        {"id": "content-wird", "kind": "container", "selector": "#content-wird"},
+        {"id": "btn-upload-file", "kind": "interactive", "selector": "#btn-upload-file"},
+        {"id": "btn-open-session-modal", "kind": "interactive", "selector": "#btn-open-session-modal"},
+        {"id": "btn-open-note-modal", "kind": "interactive", "selector": "#btn-open-note-modal"},
+        {"id": "btn-wird-complete", "kind": "interactive", "selector": "#btn-wird-complete"},
+        {"id": "tab-home", "kind": "interactive", "selector": "[data-spec-id='tab-home']"},
+        {"id": "tab-files", "kind": "interactive", "selector": "[data-spec-id='tab-files']"},
+        {"id": "tab-schedule", "kind": "interactive", "selector": "[data-spec-id='tab-schedule']"},
+        {"id": "tab-notes", "kind": "interactive", "selector": "[data-spec-id='tab-notes']"},
+        {"id": "tab-wird", "kind": "interactive", "selector": "[data-spec-id='tab-wird']"},
+        {"id": "save-toast", "kind": "visual", "selector": "#save-toast"}
+      ],
+      "features": [],
+      "audio": [],
+      "rules": [],
+      "removed": [],
+      "state": {
+        "root": "sekaiDebug",
+        "fields": {
+          "phase": "state().name",
+          "score": "state().notesCount"
+        },
+        "phaseValues": {
+          "playing": "workspace",
+          "gameover": "workspace"
+        }
+      }
+    }
+    </script>
+  </body>
+</html>
